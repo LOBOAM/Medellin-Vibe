@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDELLÍN VIBE - Experiencias Únicas</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f30d.png" type="image/png">
+    <meta name="description" content="Descubre experiencias únicas en Medellín. Planes, servicios y comunidad para viajeros y locales.">
+    <meta name="theme-color" content="#667eea">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #1fa2ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #1fa2ff 0%, #12d8fa 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: url('../css/fondo-montanas.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            position: relative;
+        }
+        /* Fondo semitransparente para mejorar legibilidad */
+        main, .hero, .footer {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px #1fa2ff22;
+        }
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%),
+                        url('../css/fondo-montanas.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 40px 0 #1fa2ff33;
+            animation: heroFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        /* Fondo animado espectacular */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 80% 20%, #1fa2ff22 0%, transparent 60%),
+                        radial-gradient(circle at 20% 80%, #764ba222 0%, transparent 60%),
+                        linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            animation: bgMove 12s ease-in-out infinite alternate;
+        }
+        @keyframes bgMove {
+            0% { background-position: 80% 20%, 20% 80%, 0 0; }
+            100% { background-position: 60% 40%, 40% 60%, 100% 100%; }
+        }
+        /* Animación y sombra en el título principal */
+        .main-title-animated {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 900;
+            color: #fff;
+            background: none;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            display: inline-block;
+            text-shadow: 0 6px 32px rgba(30,40,80,0.22), 0 1px 2px rgba(0,0,0,0.14);
+            filter: none;
+            animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+            letter-spacing: 0.13em;
+            line-height: 1.05;
+            border-radius: 0.5em;
+            padding: 0.1em 0.6em;
+            box-shadow: 0 2px 24px 0 rgba(31,162,255,0.12);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        /* Enhanced Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section Mejorado */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%),
+                        url('../css/fondo-montanas.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 40px 0 #1fa2ff33;
+            animation: heroFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes heroFadeIn {
+            0% { opacity: 0; transform: scale(1.05) translateY(-40px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .hero-content {
+            max-width: 900px;
+            padding: 2.5rem 2rem 2.5rem 2rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+            background: rgba(255,255,255,0.08);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px #1fa2ff22;
+            backdrop-filter: blur(2px);
+        }
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #1fa2ff55 0%, transparent 70%);
+            filter: blur(60px);
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0.7;
+            animation: heroGlowMove 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroGlowMove {
+            0% { left: 48%; top: 52%; }
+            100% { left: 52%; top: 48%; }
+        }
+        .main-title-animated {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 900;
+            color: #fff;
+            background: none;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            display: inline-block;
+            text-shadow: 0 6px 32px rgba(30,40,80,0.22), 0 1px 2px rgba(0,0,0,0.14);
+            filter: none;
+            animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+            letter-spacing: 0.13em;
+            line-height: 1.05;
+            border-radius: 0.5em;
+            padding: 0.1em 0.6em;
+            box-shadow: 0 2px 24px 0 rgba(31,162,255,0.12);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .hero-title {
+            font-size: 2.3rem !important;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 16px #1fa2ff44;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.2rem;
+            opacity: 0.95;
+            font-weight: 400;
+            text-shadow: 0 1px 8px #764ba244;
+        }
+        .cta-button {
+            font-size: 1.2rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 32px #1fa2ff33, 0 2px 8px #764ba244;
+            background: linear-gradient(90deg, #1fa2ff 0%, #764ba2 100%);
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button span {
+            font-size: 1.5rem;
+        }
+        .cta-button:hover {
+            transform: scale(1.07) translateY(-4px);
+            box-shadow: 0 16px 48px #1fa2ff55;
+            background: linear-gradient(90deg, #764ba2 0%, #1fa2ff 100%);
+        }
+        /* Animación de partículas */
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.13);
+            border-radius: 50%;
+            animation: float 7s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Enhanced Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-md);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: calc(var(--border-radius) - 4px);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            white-space: nowrap;
+            color: var(--dark);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--light);
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .weather-widget h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Enhanced Plan Cards */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .plan-card:hover, .plan-card.selected-cart {
+            box-shadow: 0 8px 32px #1fa2ff33, 0 2px 8px #764ba244 !important;
+            transform: scale(1.03) translateY(-6px);
+            border-color: #1fa2ff !important;
+        }
+
+        .plan-card:hover::before,
+        .plan-card.selected::before {
+            transform: scaleX(1);
+        }
+
+        .plan-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(31, 162, 255, 0.05) 0%, rgba(18, 216, 250, 0.05) 100%);
+        }
+
+        .plan-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-icon {
+            font-size: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .plan-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan-price-secondary {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .recommendations h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .recommendations-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            scroll-behavior: smooth;
+            padding-bottom: 0.5rem;
+        }
+
+        .recommendation-item {
+            min-width: 260px;
+            max-width: 320px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-input,
+        .form-select {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(31, 162, 255, 0.1);
+        }
+
+        /* Enhanced Cart */
+        .cart-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .cart-empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .cart-total {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .cart-total-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Enhanced Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Connect Section */
+        .connect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .user-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .user-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-flag {
+            font-size: 2rem;
+        }
+
+        .user-info h4 {
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        .user-interests {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+            }
+
+            .connect-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden content initially */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Notification system */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-xl);
+            border-left: 4px solid var(--success);
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: var(--transition);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+
+        .plan-card.selected-cart {
+            border-color: #1fa2ff !important;
+            background: linear-gradient(135deg, #e0f7fa 60%, #b2ebf2 100%) !important;
+            box-shadow: 0 0 0 4px #1fa2ff33, 0 8px 32px #1fa2ff22 !important;
+            color: #1fa2ff !important;
+        }
+
+        /* Fondo específico para la sección de Experiencias */
+        #planes.section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.90) 0%, rgba(230,245,255,0.90) 100%),
+                        url('../css/fondo-ciudad.webp') center/cover no-repeat;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px #1fa2ff22;
+        }
+
+        #cart-count-tab {
+            animation: cartPop 0.3s;
+        }
+        @keyframes cartPop {
+            0% { transform: scale(0.7); opacity:0.5; }
+            60% { transform: scale(1.2); opacity:1; }
+            100% { transform: scale(1); }
+        }
+        .cart-bounce {
+            animation: cartPop 0.3s;
+        }
+
+        /* Modo oscuro global */
+        body.dark-mode {
+            background: linear-gradient(120deg, #181c2a 0%, #232946 100%) !important;
+            color: #f3f6fa !important;
+        }
+        body.dark-mode .main-content,
+        body.dark-mode .section,
+        body.dark-mode .hero,
+        body.dark-mode .footer,
+        body.dark-mode .recommendations,
+        body.dark-mode .weather-widget,
+        body.dark-mode .profile-section,
+        body.dark-mode .cart-section,
+        body.dark-mode .connect-grid .user-card,
+        body.dark-mode .tabs {
+            background: rgba(30,40,80,0.92) !important;
+            color: #f3f6fa !important;
+            box-shadow: 0 8px 32px #1fa2ff33;
+        }
+        body.dark-mode .main-title-animated,
+        body.dark-mode .section-title {
+            color: #fff !important;
+            background: none !important;
+            -webkit-text-fill-color: unset !important;
+            text-shadow: 0 6px 32px #12d8fa33, 0 1px 2px #0002;
+        }
+        body.dark-mode .plan-card,
+        body.dark-mode .recommendation-item {
+            background: #232946 !important;
+            color: #f3f6fa !important;
+            border-color: #12d8fa !important;
+        }
+        body.dark-mode .plan-title,
+        body.dark-mode .plan-description,
+        body.dark-mode .plan-price-secondary,
+        body.dark-mode .cart-item-name,
+        body.dark-mode .user-info h4 {
+            color: #f3f6fa !important;
+        }
+        body.dark-mode .plan-price,
+        body.dark-mode .cart-item-price {
+            color: #10b981 !important;
+        }
+        body.dark-mode .tab-btn.active {
+            background: #12d8fa !important;
+            color: #232946 !important;
+        }
+        body.dark-mode .tab-btn {
+            color: #f3f6fa !important;
+        }
+        body.dark-mode .cta-button,
+        body.dark-mode .btn-primary {
+            background: linear-gradient(90deg, #12d8fa 0%, #1fa2ff 100%) !important;
+            color: #232946 !important;
+        }
+        body.dark-mode .cta-button:hover,
+        body.dark-mode .btn-primary:hover {
+            background: linear-gradient(90deg, #1fa2ff 0%, #12d8fa 100%) !important;
+            color: #232946 !important;
+        }
+        body.dark-mode .recommendations {
+            background: #181c2a !important;
+        }
+        body.dark-mode .recommendations h3,
+        body.dark-mode .recommendation-tag {
+            color: #12d8fa !important;
+        }
+        body.dark-mode .recommendation-item span {
+            color: #f3f6fa !important;
+        }
+        /* Botón de modo oscuro */
+        .theme-toggle-panel {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1002;
+            background: rgba(30,40,80,0.92);
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 32px #1fa2ff33;
+            padding: 0.7rem 1.2rem;
+            display: flex;
+            gap: 0.7rem;
+            align-items: center;
+        }
+        .theme-toggle-btn {
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            border-radius: 2rem;
+            padding: 0.4em 1.2em;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .theme-toggle-btn.active, .theme-toggle-btn:focus {
+            background: #12d8fa;
+            color: #232946;
+            border-color: #12d8fa;
+        }
+    </style>
+</head>
+<body>
+        <div class="theme-toggle-panel">
+            <button class="theme-toggle-btn active" id="theme-light">Claro</button>
+            <button class="theme-toggle-btn" id="theme-dark">Oscuro</button>
+        </div>
+
+    <!-- Elimino la barra de navegación superior -->
+    <!--
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Medellín Vibe</div>
+            <ul class="nav-links">
+                <li><a class="nav-link active" data-tab="planes">Experiencias</a></li>
+                <li><a class="nav-link" data-tab="servicios">Servicios</a></li>
+                <li><a class="nav-link" data-tab="perfil">Mi Perfil</a></li>
+                <li><a class="nav-link" data-tab="conectar">Conectar</a></li>
+                <li><a class="nav-link" data-tab="carrito">Carrito <span id="cart-count" style="background: var(--danger); color: white; border-radius: 50%; padding: 0.2rem 0.5rem; font-size: 0.8rem; margin-left: 0.5rem; display: none;">0</span></a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    -->
+
+    <!-- Hero mejorado con logo animado y nombre de la página integrado -->
+    <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-particles"></div>
+        <div class="hero-content">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f30d.png" alt="Logo Medellín Vibe" style="width:80px;height:80px;box-shadow:0 4px 32px #1fa2ff66;border-radius:50%;animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);margin-bottom:0.5rem;">
+                <h1 class="main-title-animated" style="margin-bottom:0.5rem;font-size:4.2rem;letter-spacing:0.13em;color:#fff;background:none;line-height:1.05;text-shadow:0 6px 32px rgba(30,40,80,0.22),0 1px 2px rgba(0,0,0,0.14);border-radius:0.5em;padding:0.1em 0.6em;box-shadow:0 2px 24px 0 rgba(31,162,255,0.12);font-weight:900;">Medellín Vibe</h1>
+            </div>
+            <!-- <h2 class="hero-title">Descubre Medellín</h2> -->
+            <p class="hero-subtitle">Experiencias únicas que conectan culturas, sabores y aventuras en la ciudad de la eterna primavera</p>
+            <button class="cta-button" id="start-btn" style="margin-top:2.2rem; font-size:1.3rem; padding:1.3rem 3rem;">
+                <span style="font-size:2rem;">✨</span>
+                Comenzar Mi Aventura
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content" style="display: none;">
+        <!-- Enhanced Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="planes">🎯 Experiencias</button>
+            <button class="tab-btn" data-tab="servicios">🛎️ Servicios</button>
+            <button class="tab-btn" data-tab="perfil">👤 Mi Perfil</button>
+            <button class="tab-btn" data-tab="conectar">🤝 Conectar</button>
+            <button class="tab-btn" data-tab="carrito" style="position:relative;">
+                🛒 Carrito
+                <span id="cart-count-tab" style="display:none;position:absolute;top:2px;right:10px;background:var(--danger);color:white;border-radius:50%;padding:0.18em 0.6em;font-size:0.95em;font-weight:700;box-shadow:0 2px 8px #d32f2f44;transition:all 0.2s;z-index:2;">0</span>
+            </button>
+        </div>
+
+        <!-- Planes Tab -->
+        <div id="planes" class="tab-content active section">
+            <div class="planes-hero-attractivo" style="display:flex;align-items:center;gap:2.5rem;justify-content:center;margin-bottom:3.5rem;flex-wrap:wrap;">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Medellín City" style="width:180px;height:180px;object-fit:cover;border-radius:2rem;box-shadow:0 8px 32px #1fa2ff33,0 2px 8px #764ba244;animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);">
+                <div style="max-width:480px;">
+                    <h2 class="section-title" style="font-size:2.7rem;margin-bottom:1rem;">¡Vive experiencias únicas en Medellín!</h2>
+                    <p style="font-size:1.25rem;line-height:1.7;color:#333;opacity:0.92;margin-bottom:1.2rem;">Sumérgete en la ciudad de la eterna primavera con planes para todos los gustos: cultura, aventura, gastronomía y naturaleza. <span style='color:#1fa2ff;font-weight:600;'>¡Elige tu próxima aventura!</span></p>
+                    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                        <span style="background:linear-gradient(90deg,#1fa2ff 0%,#764ba2 100%);color:white;padding:0.5rem 1.2rem;border-radius:2rem;font-weight:600;box-shadow:0 2px 8px #1fa2ff22;">Guías Locales</span>
+                        <span style="background:linear-gradient(90deg,#12d8fa 0%,#1fa2ff 100%);color:white;padding:0.5rem 1.2rem;border-radius:2rem;font-weight:600;box-shadow:0 2px 8px #12d8fa22;">Aventura</span>
+                        <span style="background:linear-gradient(90deg,#764ba2 0%,#1fa2ff 100%);color:white;padding:0.5rem 1.2rem;border-radius:2rem;font-weight:600;box-shadow:0 2px 8px #764ba222;">Gastronomía</span>
+                        <span style="background:linear-gradient(90deg,#10b981 0%,#34d399 100%);color:white;padding:0.5rem 1.2rem;border-radius:2rem;font-weight:600;box-shadow:0 2px 8px #10b98122;">Naturaleza</span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">Experiencias Únicas en Medellín</h2>
+            <div class="weather-widget">
+                <h3>🌤️ Clima Actual en Medellín</h3>
+                <p id="weather-info">26°C, Parcialmente nublado - Perfecto para actividades al aire libre</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card" data-plan="basico" data-price="140000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🏙️</div>
+                        <div class="plan-title">Plan Básico</div>
+                    </div>
+                    <p class="plan-description">Recorrido guiado por el centro histórico de Medellín con guía local experto</p>
+                    <div class="plan-price">
+                        $35 USD
+                        <span class="plan-price-secondary">/ $140,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="premium" data-price="260000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🚐</div>
+                        <div class="plan-title">Plan Premium</div>
+                    </div>
+                    <p class="plan-description">Recorrido completo con transporte privado y refrigerio incluido</p>
+                    <div class="plan-price">
+                        $65 USD
+                        <span class="plan-price-secondary">/ $260,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="total" data-price="440000">
+                    <div class="plan-header">
+                        <div class="plan-icon">⭐</div>
+                        <div class="plan-title">Experiencia Total</div>
+                    </div>
+                    <p class="plan-description">Todo incluido: recorrido, transporte, eventos especiales y comida gourmet</p>
+                    <div class="plan-price">
+                        $110 USD
+                        <span class="plan-price-secondary">/ $440,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="saludas" data-price="70000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🥑</div>
+                        <div class="plan-title">Saludas Gourmet</div>
+                    </div>
+                    <p class="plan-description">Tour gastronómico por los mejores restaurantes saludables de la ciudad</p>
+                    <div class="plan-price">
+                        $18 USD
+                        <span class="plan-price-secondary">/ $70,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="excursiones" data-price="180000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🌄</div>
+                        <div class="plan-title">Excursiones Naturales</div>
+                    </div>
+                    <p class="plan-description">Guatapé, Piedra del Peñol y pueblos mágicos de Antioquia</p>
+                    <div class="plan-price">
+                        $46 USD
+                        <span class="plan-price-secondary">/ $180,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="senderismo" data-price="50000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🥾</div>
+                        <div class="plan-title">Senderismo Urbano</div>
+                    </div>
+                    <p class="plan-description">Rutas ecológicas y parques naturales dentro de la ciudad</p>
+                    <div class="plan-price">
+                        $13 USD
+                        <span class="plan-price-secondary">/ $50,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="cafe" data-price="60000">
+                    <div class="plan-header">
+                        <div class="plan-icon">☕</div>
+                        <div class="plan-title">Tour del Café</div>
+                    </div>
+                    <p class="plan-description">Visita fincas cafeteras y aprende el arte del café colombiano.</p>
+                    <div class="plan-price">
+                        $15 USD
+                        <span class="plan-price-secondary">/ $60,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="graffiti" data-price="80000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🎨</div>
+                        <div class="plan-title">Graffiti Tour</div>
+                    </div>
+                    <p class="plan-description">Recorrido por la Comuna 13 y su arte urbano mundialmente famoso.</p>
+                    <div class="plan-price">
+                        $20 USD
+                        <span class="plan-price-secondary">/ $80,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="bicicleta" data-price="50000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🚴‍♂️</div>
+                        <div class="plan-title">Ciclotour Nocturno</div>
+                    </div>
+                    <p class="plan-description">Recorre la ciudad en bicicleta bajo las luces nocturnas.</p>
+                    <div class="plan-price">
+                        $13 USD
+                        <span class="plan-price-secondary">/ $50,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="salsa" data-price="70000">
+                    <div class="plan-header">
+                        <div class="plan-icon">💃</div>
+                        <div class="plan-title">Noche de Salsa</div>
+                    </div>
+                    <p class="plan-description">Clase y fiesta de salsa en los mejores clubes de Medellín.</p>
+                    <div class="plan-price">
+                        $18 USD
+                        <span class="plan-price-secondary">/ $70,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="parapente" data-price="180000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🪂</div>
+                        <div class="plan-title">Parapente</div>
+                    </div>
+                    <p class="plan-description">Vuela sobre Medellín y vive una experiencia inolvidable.</p>
+                    <div class="plan-price">
+                        $46 USD
+                        <span class="plan-price-secondary">/ $180,000 COP</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider recomendaciones -->
+            <div class="recommendations">
+                <h3>💡 Recomendaciones Personalizadas</h3>
+                <div class="recommendations-slider" id="recommendations-list">
+                    <div class="recommendation-item"><span>🌤️ Clima perfecto para senderismo y actividades al aire libre</span><span class="recommendation-tag">Recomendado hoy</span></div>
+                    <div class="recommendation-item"><span>🎨 Actividades culturales ideales para días lluviosos</span><span class="recommendation-tag">Plan B</span></div>
+                    <div class="recommendation-item"><span>🚴 Opciones económicas para presupuestos ajustados</span><span class="recommendation-tag">Económico</span></div>
+                    <div class="recommendation-item"><span>🇨🇴 Experiencias con guía local incluido</span><span class="recommendation-tag">Para extranjeros</span></div>
+                    <div class="recommendation-item"><span>☕ Tour del café: ¡reserva con clima fresco!</span><span class="recommendation-tag">Café Lovers</span></div>
+                    <div class="recommendation-item"><span>🪂 Parapente solo para los más aventureros</span><span class="recommendation-tag">Adrenalina</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Servicios Tab -->
+        <div id="servicios" class="tab-content section">
+            <h2 class="section-title">Servicios Complementarios</h2>
+            <div class="plans-grid">
+                <div class="plan-card" data-plan="guia" data-price="100000">
+                    <div class="plan-header">
+                        <div class="plan-icon">👨‍🏫</div>
+                        <div class="plan-title">Guía Local</div>
+                    </div>
+                    <p class="plan-description">Conoce la ciudad con un experto local que te mostrará los mejores lugares</p>
+                    <div class="plan-price">
+                        $25 USD
+                        <span class="plan-price-secondary">/ $100,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="transporte" data-price="150000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🚗</div>
+                        <div class="plan-title">Transporte Privado</div>
+                    </div>
+                    <p class="plan-description">Desplázate con comodidad y seguridad en un vehículo privado</p>
+                    <div class="plan-price">
+                        $37 USD
+                        <span class="plan-price-secondary">/ $150,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="refrigerio" data-price="30000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🥪</div>
+                        <div class="plan-title">Refrigerio Incluido</div>
+                    </div>
+                    <p class="plan-description">Disfruta de un delicioso refrigerio durante tu experiencia</p>
+                    <div class="plan-price">
+                        $8 USD
+                        <span class="plan-price-secondary">/ $30,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="fotografia" data-price="70000">
+                    <div class="plan-header">
+                        <div class="plan-icon">📸</div>
+                        <div class="plan-title">Servicio de Fotografía</div>
+                    </div>
+                    <p class="plan-description">Captura los mejores momentos de tu experiencia con un fotógrafo profesional</p>
+                    <div class="plan-price">
+                        $18 USD
+                        <span class="plan-price-secondary">/ $70,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="souvenirs" data-price="50000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🎁</div>
+                        <div class="plan-title">Souvenirs Personalizados</div>
+                    </div>
+                    <p class="plan-description">Lleva un recuerdo único de tu experiencia en Medellín</p>
+                    <div class="plan-price">
+                        $13 USD
+                        <span class="plan-price-secondary">/ $50,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="seguros" data-price="40000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🛡️</div>
+                        <div class="plan-title">Seguros de Viaje</div>
+                    </div>
+                    <p class="plan-description">Viaja con tranquilidad, cubriendo cualquier eventualidad</p>
+                    <div class="plan-price">
+                        $10 USD
+                        <span class="plan-price-secondary">/ $40,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="spa" data-price="90000">
+                    <div class="plan-header">
+                        <div class="plan-icon">💆‍♂️</div>
+                        <div class="plan-title">Spa & Relax</div>
+                    </div>
+                    <p class="plan-description">Sesión de spa y masajes para recargar energías.</p>
+                    <div class="plan-price">
+                        $23 USD
+                        <span class="plan-price-secondary">/ $90,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="transfers" data-price="120000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🚌</div>
+                        <div class="plan-title">Transfers Aeropuerto</div>
+                    </div>
+                    <p class="plan-description">Transporte seguro y cómodo desde/hacia el aeropuerto.</p>
+                    <div class="plan-price">
+                        $30 USD
+                        <span class="plan-price-secondary">/ $120,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="chef" data-price="200000">
+                    <div class="plan-header">
+                        <div class="plan-icon">👨‍🍳</div>
+                        <div class="plan-title">Chef Privado</div>
+                    </div>
+                    <p class="plan-description">Disfruta de una cena gourmet en tu alojamiento.</p>
+                    <div class="plan-price">
+                        $50 USD
+                        <span class="plan-price-secondary">/ $200,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="barber" data-price="40000">
+                    <div class="plan-header">
+                        <div class="plan-icon">✂️</div>
+                        <div class="plan-title">Barbería a Domicilio</div>
+                    </div>
+                    <p class="plan-description">Corte y arreglo personal en tu hospedaje.</p>
+                    <div class="plan-price">
+                        $10 USD
+                        <span class="plan-price-secondary">/ $40,000 COP</span>
+                    </div>
+                </div>
+
+                <div class="plan-card" data-plan="yoga" data-price="60000">
+                    <div class="plan-header">
+                        <div class="plan-icon">🧘‍♀️</div>
+                        <div class="plan-title">Clase de Yoga</div>
+                    </div>
+                    <p class="plan-description">Sesión privada de yoga para relajarte y recargar energía.</p>
+                    <div class="plan-price">
+                        $15 USD
+                        <span class="plan-price-secondary">/ $60,000 COP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil Tab -->
+        <div id="perfil" class="tab-content section">
+            <h2 class="section-title">Mi Perfil</h2>
+            <div class="profile-section">
+                <div class="profile-avatar" id="profile-avatar">
+                    <!-- Avatar por defecto: emoji de viajero -->
+                    <span role="img" aria-label="Viajero" class="fade-in" id="avatar-emoji">🌍</span>
+                    <img id="avatar-img" src="" alt="Foto de perfil" style="display:none;width:120px;height:120px;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0;"/>
+                </div>
+                <div style="text-align:center;margin-bottom:1.2rem;">
+                    <input type="file" id="input-avatar" accept="image/*" style="display:none;">
+                    <button type="button" class="btn btn-outline" id="btn-cambiar-avatar" style="margin-bottom:0.5rem;">Cambiar foto de perfil</button>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="nombre">Nombre Completo</label>
+                        <input class="form-input" type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Correo Electrónico</label>
+                        <input class="form-input" type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="telefono">Teléfono</label>
+                        <input class="form-input" type="tel" id="telefono" placeholder="Ingresa tu número de teléfono" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ciudad">Ciudad</label>
+                        <input class="form-input" type="text" id="ciudad" placeholder="Ingresa tu ciudad" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pais">País</label>
+                        <select class="form-select" id="pais" required>
+                            <option value="">Selecciona tu país</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="México">México</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Perú">Perú</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="España">España</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Alemania">Alemania</option>
+                            <option value="Italia">Italia</option>
+                            <option value="Reino Unido">Reino Unido</option>
+                            <option value="Canadá">Canadá</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="intereses">Intereses</label>
+                        <input class="form-input" type="text" id="intereses" placeholder="Ej: Cultura, Gastronomía, Aventura" required>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="guardar-perfil">Guardar Cambios</button>
+            </div>
+        </div>
+
+        <!-- Conectar Tab -->
+        <div id="conectar" class="tab-content section">
+            <h2 class="section-title">Conectar con Otros Viajeros</h2>
+            <div class="connect-grid">
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-flag">🇨🇴</div>
+                        <div class="user-info">
+                            <h4>Juan Pérez</h4>
+                            <div class="user-interests">Cultura, Gastronomía, Historia</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-accent" data-user="juan">Conectar</button>
+                </div>
+
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-flag">🇺🇸</div>
+                        <div class="user-info">
+                            <h4>Emily Johnson</h4>
+                            <div class="user-interests">Adventure, Food, Travel</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-accent" data-user="emily">Connect</button>
+                </div>
+
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-flag">🇧🇷</div>
+                        <div class="user-info">
+                            <h4>Lucas Oliveira</h4>
+                            <div class="user-interests">Cultura, Música, Naturaleza</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-accent" data-user="lucas">Conectar</button>
+                </div>
+
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-flag">🇦🇷</div>
+                        <div class="user-info">
+                            <h4>María González</h4>
+                            <div class="user-interests">Gastronomía, Arte, Historia</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-accent" data-user="maria">Conectar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrito Tab -->
+        <div id="carrito" class="tab-content section">
+            <h2 class="section-title">Mi Carrito</h2>
+            <div class="cart-section">
+                <div class="cart-empty" id="cart-empty">
+                    <div class="cart-empty-icon">🛒</div>
+                    <p>Tu carrito está vacío. Agrega algunas experiencias o servicios.</p>
+                </div>
+                <div class="cart-items" id="cart-items" style="display: none;">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="cart-total" id="cart-total" style="display: none;">
+                    <span>Total:</span>
+                    <span class="cart-total-amount" id="cart-total-amount">$0 USD</span>
+                </div>
+                <div class="cart-actions" id="cart-actions" style="display: none;">
+                    <button class="btn btn-primary" id="checkout-btn">Pagar</button>
+                    <button class="btn btn-outline" id="continue-shopping-btn">Seguir Explorando</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    // Animación de partículas en el hero
+    function createParticles() {
+        const particlesContainer = document.querySelector('.hero-particles');
+        if (!particlesContainer) return;
+        particlesContainer.innerHTML = '';
+        const particleCount = 22;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 14 + 8;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 7 + 's';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const startBtn = document.getElementById('start-btn');
+        const hero = document.getElementById('hero');
+        const mainContent = document.getElementById('main-content');
+        if (startBtn && hero && mainContent) {
+            startBtn.addEventListener('click', function() {
+                hero.style.display = 'none';
+                mainContent.style.display = 'block';
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // --- Hacer que los botones de tabs y nav funcionen ---
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            const btn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+            const tab = document.getElementById(tabName);
+            if (btn) btn.classList.add('active');
+            if (tab) tab.classList.add('active');
+        }
+
+        // Tabs botones
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = btn.getAttribute('data-tab');
+                showTab(tab);
+                // Mostrar mainContent si está oculto (por si el usuario vuelve al hero)
+                if (mainContent.style.display === 'none') {
+                    hero.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Nav links (arriba)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (hero.style.display !== 'none') {
+                    hero.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }
+                const tab = link.getAttribute('data-tab');
+                showTab(tab);
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Botón del hero para mostrar mainContent
+        if (startBtn && hero && mainContent) {
+            startBtn.addEventListener('click', function() {
+                hero.style.display = 'none';
+                mainContent.style.display = 'block';
+                showTab('planes');
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // --- Carrito ---
+        let cart = [];
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartEmptyDiv = document.getElementById('cart-empty');
+            const cartTotalDiv = document.getElementById('cart-total');
+            const cartActionsDiv = document.getElementById('cart-actions');
+            const cartTotalAmount = document.getElementById('cart-total-amount');
+            const cartCount = document.getElementById('cart-count');
+            const cartCountTab = document.getElementById('cart-count-tab');
+            if (cart.length === 0) {
+                cartItemsDiv.style.display = 'none';
+                cartTotalDiv.style.display = 'none';
+                cartActionsDiv.style.display = 'none';
+                cartEmptyDiv.style.display = 'block';
+                if (cartCount) cartCount.style.display = 'none';
+                if (cartCountTab) cartCountTab.style.display = 'none';
+                return;
+            }
+            cartItemsDiv.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">$${item.priceUSD} USD <span class="plan-price-secondary">/ $${item.priceCOP} COP</span></div>
+                    </div>
+                    <button class="btn btn-outline" data-remove="${item.id}">Eliminar</button>
+                </div>
+            `).join('');
+            cartItemsDiv.style.display = 'block';
+            cartEmptyDiv.style.display = 'none';
+            cartTotalDiv.style.display = 'block';
+            cartActionsDiv.style.display = 'flex';
+            let totalUSD = cart.reduce((sum, item) => sum + item.priceUSD, 0);
+            cartTotalAmount.textContent = `$${totalUSD} USD`;
+            if (cartCount) {
+                cartCount.textContent = cart.length;
+                cartCount.style.display = 'inline-block';
+            }
+            if (cartCountTab) {
+                cartCountTab.textContent = cart.length;
+                cartCountTab.style.display = 'inline-block';
+                cartCountTab.classList.add('cart-bounce');
+                setTimeout(()=>cartCountTab.classList.remove('cart-bounce'), 400);
+            }
+        }
+
+        // Agregar a carrito desde cualquier plan-card
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const id = card.getAttribute('data-plan');
+                const priceCOP = parseInt(card.getAttribute('data-price'));
+                let priceUSD = 0;
+                if (priceCOP === 140000) priceUSD = 35;
+                else if (priceCOP === 260000) priceUSD = 65;
+                else if (priceCOP === 440000) priceUSD = 110;
+                else if (priceCOP === 70000) priceUSD = 18;
+                else if (priceCOP === 180000) priceUSD = 46;
+                else if (priceCOP === 50000) priceUSD = 13;
+                else if (priceCOP === 100000) priceUSD = 25;
+                else if (priceCOP === 150000) priceUSD = 37;
+                else if (priceCOP === 30000) priceUSD = 8;
+                else if (priceCOP === 40000) priceUSD = 10;
+                else priceUSD = Math.round(priceCOP / 4000);
+                const name = card.querySelector('.plan-title').textContent;
+                // Evitar duplicados
+                if (!cart.some(item => item.id === id)) {
+                    cart.push({ id, name, priceUSD, priceCOP });
+                    // Marcar visualmente la selección
+                    card.classList.add('selected-cart');
+                    updateCartDisplay();
+                }
+            });
+        });
+
+        // Eliminar del carrito
+        document.getElementById('cart-items').addEventListener('click', function(e) {
+            if (e.target && e.target.matches('button[data-remove]')) {
+                const id = e.target.getAttribute('data-remove');
+                cart = cart.filter(item => item.id !== id);
+                // Quitar color de selección
+                const card = document.querySelector('.plan-card[data-plan="' + id + '"]');
+                if (card) card.classList.remove('selected-cart');
+                updateCartDisplay();
+            }
+        });
+
+        // Botón seguir explorando
+        document.getElementById('continue-shopping-btn').addEventListener('click', function() {
+            showTab('planes');
+        });
+
+        // Botón pagar
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            if (cart.length === 0) return;
+            alert('¡Gracias por tu compra! Pronto recibirás un correo con los detalles.');
+            cart = [];
+            updateCartDisplay();
+        });
+
+        // Inicializar carrito vacío
+        updateCartDisplay();
+
+        // Slider recomendaciones auto-scroll
+        const recSlider = document.getElementById('recommendations-list');
+        if(recSlider) {
+            let scrollAmount = 0;
+            setInterval(() => {
+                if(recSlider.scrollWidth - recSlider.clientWidth - recSlider.scrollLeft < 10) {
+                    recSlider.scrollTo({left: 0, behavior: 'smooth'});
+                    scrollAmount = 0;
+                } else {
+                    scrollAmount += 260;
+                    recSlider.scrollBy({left: 260, behavior: 'smooth'});
+                }
+            }, 3500);
+        }
+
+        // --- Foto de perfil ---
+        const inputAvatar = document.getElementById('input-avatar');
+        const btnCambiarAvatar = document.getElementById('btn-cambiar-avatar');
+        const avatarImg = document.getElementById('avatar-img');
+        const avatarEmoji = document.getElementById('avatar-emoji');
+        btnCambiarAvatar.addEventListener('click', () => inputAvatar.click());
+        inputAvatar.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                avatarImg.src = ev.target.result;
+                avatarImg.style.display = 'block';
+                avatarEmoji.style.display = 'none';
+                // Guardar en localStorage
+                localStorage.setItem('perfilMVibeAvatar', ev.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+        // Al cargar, mostrar foto si existe
+        const savedAvatar = localStorage.getItem('perfilMVibeAvatar');
+        if (savedAvatar) {
+            avatarImg.src = savedAvatar;
+            avatarImg.style.display = 'block';
+            avatarEmoji.style.display = 'none';
+        }
+
+        // Guardar perfil y mostrar en Conectar
+        const perfilForm = document.getElementById('guardar-perfil');
+        if (perfilForm) {
+            perfilForm.addEventListener('click', function() {
+                const nombre = document.getElementById('nombre').value.trim();
+                const intereses = document.getElementById('intereses').value.trim();
+                const pais = document.getElementById('pais').value.trim();
+                // ...existing code...
+            });
+        }
+        function mostrarPerfilEnConectar() {
+            const perfil = JSON.parse(localStorage.getItem('perfilMVibe') || 'null');
+            if (!perfil) return;
+            const connectGrid = document.querySelector('.connect-grid');
+            if (!connectGrid) return;
+            // Eliminar perfil anterior si existe
+            const old = document.getElementById('user-card-mio');
+            if (old) old.remove();
+            // Insertar al inicio
+            const avatar = localStorage.getItem('perfilMVibeAvatar');
+            let avatarHtml = avatar ? `<img src='${avatar}' alt='Foto de perfil' style='width:48px;height:48px;object-fit:cover;border-radius:50%;margin-right:0.7rem;'>` : `<span class='user-flag'>🌍</span>`;
+            const card = document.createElement('div');
+            card.className = 'user-card';
+            card.id = 'user-card-mio';
+            card.innerHTML = `
+                <div class="user-header">
+                    ${avatarHtml}
+                    <div class="user-info">
+                        <h4>${perfil.nombre} <span style='font-size:1rem;color:#1fa2ff;'>(Tú)</span></h4>
+                        <div class="user-interests">${perfil.intereses}</div>
+                        <div class="user-interests" style="font-size:0.95rem;opacity:0.7;">${perfil.pais}</div>
+                    </div>
+                </div>
+                <button class="btn btn-success" disabled>¡Este eres tú!</button>
+            `;
+            connectGrid.prepend(card);
+        }
+        // Mostrar perfil propio si existe al cargar
+        mostrarPerfilEnConectar();
+
+        // Modo oscuro funcional
+        const themeLightBtn = document.getElementById('theme-light');
+        const themeDarkBtn = document.getElementById('theme-dark');
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeLightBtn.classList.remove('active');
+                themeDarkBtn.classList.add('active');
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeDarkBtn.classList.remove('active');
+                themeLightBtn.classList.add('active');
+            }
+        }
+        themeLightBtn.onclick = ()=>setTheme('light');
+        themeDarkBtn.onclick = ()=>setTheme('dark');
+    });
+    </script>
+    <!-- Footer moderno -->
+    <footer class="footer">
+        <div>Medellín Vibe &copy; 2025. Todos los derechos reservados.</div>
+        <div class="footer-social">
+            <a href="https://instagram.com/medellinvibe" target="_blank" title="Instagram"><span>📸</span></a>
+            <a href="https://wa.me/573001234567" target="_blank" title="WhatsApp"><span>💬</span></a>
+            <a href="mailto:hola@medellinvibe.co" title="Email"><span>✉️</span></a>
+            <a href="https://facebook.com/medellinvibe" target="_blank" title="Facebook"><span>👍</span></a>
+        </div>
+        <div style="font-size:0.9rem;opacity:0.7;">Hecho con ❤️ en Medellín</div>
+    </footer>
+</body>
+</html>
